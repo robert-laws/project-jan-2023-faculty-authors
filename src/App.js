@@ -10,7 +10,7 @@ import {
 } from './pages';
 function App() {
   return (
-    <div className='bg-white'>
+    <div className='bg-white flex flex-col min-h-screen'>
       <Router>
         <Routes>
           {/* Public Routes */}

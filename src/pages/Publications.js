@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PublicationsContext from '../context/publications/publicationsContext';
-import { Navigation, Heading, Container } from '../components';
+import { Navigation, Heading, Container, Footer } from '../components';
 
 export const Publications = () => {
   const { publications, isLoading, publicationsError, getPublications } =
@@ -98,6 +98,7 @@ export const Publications = () => {
           </div>
         </div>
       </Container>
+      <Footer />
     </>
   );
 };
