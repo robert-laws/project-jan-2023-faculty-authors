@@ -1,9 +1,86 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import PublicationsContext from '../context/publications/publicationsContext';
 import { Navigation, Heading, Container, Footer } from '../components';
+import { Table } from '../components/Table';
 
 export const Publications = () => {
+  const columns = useMemo(
+    () => [
+      {
+        Header: 'Title',
+        accessor: 'title', // accessor is the "key" in the data
+        Cell: ({ row }) => {
+          let fullTitle = '';
+          if (row.original.title === '') {
+            fullTitle = row.original.sourceTitle;
+          } else {
+            fullTitle = row.original.title;
+          }
+          return (
+            <Link
+              className='text-blue-600 hover:text-blue-500'
+              to={`/publication/${row.original.id}`}
+            >
+              {fullTitle}
+            </Link>
+          );
+        },
+        disableFilters: true,
+      },
+      // {
+      //   Header: 'Source Title',
+      //   accessor: 'sourceTitle', // accessor is the "key" in the data
+      // },
+      // {
+      //   Header: 'Publication Title',
+      //   Cell: ({ row }) => {
+      //     let fullTitle = '';
+      //     if (row.original.title === '') {
+      //       fullTitle = row.original.sourceTitle;
+      //     } else {
+      //       fullTitle = row.original.title;
+      //     }
+      //     return (
+      //       <Link
+      //         className='text-blue-600 hover:text-blue-500'
+      //         to={`/publication/${row.original.id}`}
+      //       >
+      //         {fullTitle}
+      //       </Link>
+      //     );
+      //   },
+      // },
+      {
+        Header: 'Name',
+        Cell: ({ row }) => {
+          return `${row.original.firstName} ${row.original.lastName}`;
+        },
+      },
+      // {
+      //   Header: 'First Name',
+      //   accessor: 'firstName', // accessor is the "key" in the data
+      // },
+      // {
+      //   Header: 'Last Name',
+      //   accessor: 'lastName', // accessor is the "key" in the data
+      // },
+      {
+        Header: 'Language',
+        accessor: 'language', // accessor is the "key" in the data
+      },
+      {
+        Header: 'Document Type',
+        accessor: 'documentType', // accessor is the "key" in the data
+      },
+      {
+        Header: 'Year',
+        accessor: 'year',
+      },
+    ],
+    []
+  );
+
   const { publications, isLoading, publicationsError, getPublications } =
     useContext(PublicationsContext);
 
@@ -23,7 +100,8 @@ export const Publications = () => {
             <div className='-my-2 -mx-4 sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
                 <div className='overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg'>
-                  <table className='table-fixed divide-y divide-gray-300'>
+                  <Table columns={columns} data={publications} />
+                  {/* <table className='table-fixed divide-y divide-gray-300'>
                     <thead className='bg-gray-50'>
                       <tr>
                         <th
@@ -91,7 +169,7 @@ export const Publications = () => {
                         ))
                       )}
                     </tbody>
-                  </table>
+                  </table> */}
                 </div>
               </div>
             </div>
