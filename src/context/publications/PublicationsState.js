@@ -1,7 +1,7 @@
 import { useReducer, useCallback } from 'react';
 import { GET_PUBLICATIONS, PUBLICATIONS_ERROR } from '../types';
-import PublicationsContext from './PublicationsContext';
-import PublicationsReducer from './PublicationsReducer';
+import PublicationsContext from './publicationsContext';
+import publicationsReducer from './publicationsReducer';
 import data from '../../data/faculty-data-ten.json';
 
 const PublicationsState = ({ children }) => {
@@ -11,7 +11,7 @@ const PublicationsState = ({ children }) => {
     publicationsError: null,
   };
 
-  const [state, dispatch] = useReducer(PublicationsReducer, initialState);
+  const [state, dispatch] = useReducer(publicationsReducer, initialState);
 
   const getPublications = useCallback(() => {
     let allPublications = [];
