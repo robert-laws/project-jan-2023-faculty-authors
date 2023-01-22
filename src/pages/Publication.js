@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation, Heading, Container } from '../components';
+import { Navigation, Heading, Container, Footer } from '../components';
 import { useParams } from 'react-router-dom';
 
 export const Publication = () => {
@@ -11,6 +11,7 @@ export const Publication = () => {
       <Container>
         <Heading>Publication # {id}</Heading>
       </Container>
+      <Footer />
     </>
   );
 };

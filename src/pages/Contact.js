@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation, Heading, Container } from '../components';
+import { Navigation, Heading, Container, Footer } from '../components';
 
 export const Contact = () => {
   return (
@@ -8,6 +8,7 @@ export const Contact = () => {
       <Container>
         <Heading>Contact</Heading>
       </Container>
+      <Footer />
     </>
   );
 };

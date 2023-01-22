@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation, Heading, Container } from '../components';
+import { Navigation, Heading, Container, Footer } from '../components';
 
 export const Login = () => {
   return (
@@ -8,6 +8,7 @@ export const Login = () => {
       <Container>
         <Heading>Login</Heading>
       </Container>
+      <Footer />
     </>
   );
 };
