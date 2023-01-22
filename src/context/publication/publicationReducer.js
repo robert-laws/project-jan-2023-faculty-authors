@@ -8,6 +8,7 @@ const PublicationReducer = (state, action) => {
         publication: action.payload,
         isLoading: false,
       };
+
     case PUBLICATION_ERROR:
       return {
         ...state,
