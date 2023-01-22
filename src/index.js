@@ -4,12 +4,15 @@ import './index.css';
 import './custom.css';
 import App from './App';
 import PublicationsState from './context/publications/PublicationsState';
+import PublicationState from './context/publication/PublicationState';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PublicationsState>
-      <App />
+      <PublicationState>
+        <App />
+      </PublicationState>
     </PublicationsState>
   </React.StrictMode>
 );

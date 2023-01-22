@@ -65,7 +65,7 @@ export const Publications = () => {
                         </tr>
                       ) : (
                         publications.map((pub) => (
-                          <tr key={pub.id}>
+                          <tr key={pub.pubId}>
                             <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
                               {`${pub.firstName} ${pub.lastName}`}
                             </td>
@@ -80,7 +80,7 @@ export const Publications = () => {
                             </td>
                             <td className='relative whitespace-normal py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6'>
                               <Link
-                                to={`/publication/${pub.id}`}
+                                to={`/publication/${pub.pubId}`}
                                 className='text-indigo-600 hover:text-indigo-900'
                               >
                                 View
