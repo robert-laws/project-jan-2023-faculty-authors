@@ -5,23 +5,27 @@ import {
   Home,
   NewPublication,
   About,
+  Contact,
   Login,
 } from './pages';
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Public Routes */}
-        <Route path='/' element={<Home />} />
-        <Route path='/publications' element={<Publications />} />
-        <Route path='/publication/:id' element={<Publication />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/login' element={<Login />} />
+    <div className='bg-white'>
+      <Router>
+        <Routes>
+          {/* Public Routes */}
+          <Route path='/' element={<Home />} />
+          <Route path='/publications' element={<Publications />} />
+          <Route path='/publication/:id' element={<Publication />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/login' element={<Login />} />
 
-        {/* Admin Routes */}
-        <Route path='/new' element={<NewPublication />} />
-      </Routes>
-    </Router>
+          {/* Admin Routes */}
+          <Route path='/new' element={<NewPublication />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

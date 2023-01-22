@@ -1,5 +1,13 @@
 import React from 'react';
+import { Navigation, Heading, Container } from '../components';
 
 export const Login = () => {
-  return <div>Login</div>;
+  return (
+    <>
+      <Navigation />
+      <Container>
+        <Heading>Login</Heading>
+      </Container>
+    </>
+  );
 };

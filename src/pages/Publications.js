@@ -1,5 +1,13 @@
 import React from 'react';
+import { Navigation, Heading, Container } from '../components';
 
 export const Publications = () => {
-  return <div>Publications</div>;
+  return (
+    <>
+      <Navigation />
+      <Container>
+        <Heading>All Publications</Heading>
+      </Container>
+    </>
+  );
 };

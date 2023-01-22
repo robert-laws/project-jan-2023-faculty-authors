@@ -1,5 +1,13 @@
 import React from 'react';
+import { Navigation, Heading, Container } from '../components';
 
 export const Home = () => {
-  return <div className='text-red-500 m-4'>Home</div>;
+  return (
+    <>
+      <Navigation />
+      <Container>
+        <Heading>Home Page</Heading>
+      </Container>
+    </>
+  );
 };
