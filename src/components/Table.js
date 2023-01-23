@@ -1,7 +1,22 @@
-// import { useMemo } from 'react';
-import { useTable, usePagination } from 'react-table';
+import { useMemo } from 'react';
+import {
+  useTable,
+  usePagination,
+  useFilters,
+  useGlobalFilter,
+} from 'react-table';
+import { GlobalFilter } from './tableFilters/GlobalFilter';
+import { DefaultColumnFilter } from './tableFilters/DefaultColumnFilter';
 
 export const Table = ({ columns, data }) => {
+  const defaultColumn = useMemo(
+    () => ({
+      // Let's set up our default Filter UI
+      Filter: DefaultColumnFilter,
+    }),
+    []
+  );
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -17,20 +32,29 @@ export const Table = ({ columns, data }) => {
     nextPage,
     previousPage,
     setPageSize,
-    state: { pageIndex, pageSize },
+    state,
+    setGlobalFilter,
   } = useTable(
     {
       columns,
       data,
-      initialState: { pageIndex: 0 },
+      defaultColumn,
+      initialState: { pageIndex: 0, hiddenColumns: ['firstName', 'lastName'] },
     },
+    useFilters,
+    useGlobalFilter,
     usePagination
   );
+
+  const { globalFilter, pageIndex, pageSize } = state;
 
   return (
     <>
       <div className='mt-2'>
         <span className='font-medium'>{rows.length}</span> publications
+      </div>
+      <div>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       </div>
       <div className='mt-4 flex flex-col'>
         <div className='-my-2 -mx-4 sm:-mx-6 lg:-mx-8'>
@@ -55,6 +79,9 @@ export const Table = ({ columns, data }) => {
                           ])}
                         >
                           {column.render('Header')}
+                          <div>
+                            {column.canFilter ? column.render('Filter') : null}
+                          </div>
                         </th>
                       ))}
                     </tr>
