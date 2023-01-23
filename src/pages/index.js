@@ -9,3 +9,6 @@ export { Login } from './Login';
 
 // Admin pages
 export { NewPublication } from './admin/NewPublication';
+
+// 404
+export { NotFound } from './NotFound';
