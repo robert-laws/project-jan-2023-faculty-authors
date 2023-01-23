@@ -49,20 +49,18 @@ export const SelectColumnFilter = ({
     return sortable;
   }, [id, preFilteredRows]);
 
-  // console.log(listOptions);
-
   return (
     <div className='checkboxFilters' id={`checkboxes-${id}`}>
       <div className='block'>
-        <span className='block capitalize mb-4'>
+        <span className='block capitalize mb-1 text-base'>
           {id === 'documentType'
             ? 'Document Type'
             : id.charAt(0).toUpperCase() + id.slice(1)}
         </span>
         {listOptions.map((option, i) => {
           return (
-            <div key={i}>
-              <div className='flex items-start'>
+            <div className='relative flex items-start' key={i}>
+              <div className='flex h-5 items-center mb-1'>
                 <input
                   type='checkbox'
                   className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded'
@@ -73,6 +71,8 @@ export const SelectColumnFilter = ({
                     setFilter(setFilteredParams(filterValue, e.target.value));
                   }}
                 ></input>
+              </div>
+              <div className='ml-1 text-sm mb-1'>
                 <label
                   htmlFor={option[0]}
                   className='ml-1.5 font-medium text-gray-700'

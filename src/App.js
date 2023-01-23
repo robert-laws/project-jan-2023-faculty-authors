@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   Publications,
+  Publications2,
   Publication,
   Home,
   NewPublication,
@@ -16,6 +17,7 @@ function App() {
           {/* Public Routes */}
           <Route path='/' element={<Home />} />
           <Route path='/publications' element={<Publications />} />
+          <Route path='/publications2' element={<Publications2 />} />
           <Route path='/publication/:id' element={<Publication />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />

@@ -4,11 +4,59 @@
   left: 0;
 }
 #checkboxes-language {
-  margin-top: 920px;
+  margin-top: 990px;
+  left: 70px;
 }
 #checkboxes-documentType {
   margin-top: 420px;
+  left: 70px;
 }
 #checkboxes-year {
   margin-top: -50px;
+  left: 70px;
+}
+
+/* pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.pagination .page-number {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0e7490;
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.pagination .page-number:hover {
+  color: #fff;
+  background: #0e7490;
+}
+
+.pagination .active {
+  color: #fff;
+  background: #0e7490;
+}
+
+.pagination .active:hover {
+  color: #0e7490;
+  background: #fff;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.pagination .disabled a:hover {
+  cursor: auto;
+  color: #00a8ff;
+  background: #fff;
 }
