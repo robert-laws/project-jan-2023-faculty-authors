@@ -9,6 +9,10 @@ export const Publication = () => {
     useContext(PublicationContext);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (id) {
       getPublicationById(+id);
     }

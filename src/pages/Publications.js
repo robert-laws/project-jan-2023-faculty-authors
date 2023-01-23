@@ -10,9 +10,7 @@ export const Publications = () => {
       {
         Header: 'Title',
         className: '',
-        style: {
-          fontWeight: 'normal',
-        },
+        style: {},
         accessor: 'title', // accessor is the "key" in the data
         Cell: ({ row }) => {
           let fullTitle = '';
@@ -24,7 +22,7 @@ export const Publications = () => {
           return (
             <Link
               className='text-blue-600 hover:text-blue-500'
-              to={`/publication/${row.original.id}`}
+              to={`/publication/${row.original.pubId}`}
             >
               {fullTitle}
             </Link>
@@ -32,54 +30,32 @@ export const Publications = () => {
         },
         disableFilters: true,
       },
-      // {
-      //   Header: 'Source Title',
-      //   accessor: 'sourceTitle', // accessor is the "key" in the data
-      // },
-      // {
-      //   Header: 'Publication Title',
-      //   Cell: ({ row }) => {
-      //     let fullTitle = '';
-      //     if (row.original.title === '') {
-      //       fullTitle = row.original.sourceTitle;
-      //     } else {
-      //       fullTitle = row.original.title;
-      //     }
-      //     return (
-      //       <Link
-      //         className='text-blue-600 hover:text-blue-500'
-      //         to={`/publication/${row.original.id}`}
-      //       >
-      //         {fullTitle}
-      //       </Link>
-      //     );
-      //   },
-      // },
       {
-        Header: 'Name',
+        Header: 'Author',
         Cell: ({ row }) => {
           return `${row.original.firstName} ${row.original.lastName}`;
         },
       },
-      // {
-      //   Header: 'First Name',
-      //   accessor: 'firstName', // accessor is the "key" in the data
-      // },
-      // {
-      //   Header: 'Last Name',
-      //   accessor: 'lastName', // accessor is the "key" in the data
-      // },
+      {
+        Header: 'Year',
+        accessor: 'year',
+      },
       {
         Header: 'Language',
         accessor: 'language', // accessor is the "key" in the data
+        Cell: ({ row }) => {
+          let language = '';
+          if (row.original.language === '') {
+            language = 'Not Specified';
+          } else {
+            language = row.original.language;
+          }
+          return language;
+        },
       },
       {
         Header: 'Document Type',
         accessor: 'documentType', // accessor is the "key" in the data
-      },
-      {
-        Header: 'Year',
-        accessor: 'year',
       },
     ],
     []

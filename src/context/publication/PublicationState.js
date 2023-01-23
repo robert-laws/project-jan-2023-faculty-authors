@@ -2,7 +2,7 @@ import { useReducer, useCallback } from 'react';
 import { GET_PUBLICATION_BY_ID, PUBLICATION_ERROR } from '../types';
 import PublicationContext from './publicationContext';
 import publicationReducer from './publicationReducer';
-import data from '../../data/faculty-data-ten.json';
+import data from '../../data/faculty-data.json';
 
 const PublicationState = ({ children }) => {
   const initialState = {
