@@ -9,6 +9,10 @@ export const Publications = () => {
     () => [
       {
         Header: 'Title',
+        className: '',
+        style: {
+          fontWeight: 'normal',
+        },
         accessor: 'title', // accessor is the "key" in the data
         Cell: ({ row }) => {
           let fullTitle = '';

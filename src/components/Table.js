@@ -19,8 +19,13 @@ export const Table = ({ columns, data }) => {
             {headerGroup.headers.map((column) => (
               <th
                 scope='col'
-                className='py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-6 w-1/5'
-                {...column.getHeaderProps()}
+                className='py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-6'
+                {...column.getHeaderProps([
+                  {
+                    style: column.style,
+                    className: column.className,
+                  },
+                ])}
               >
                 {column.render('Header')}
               </th>
