@@ -10,7 +10,9 @@ export const Publications = () => {
       {
         Header: 'Title',
         className: '',
-        style: {},
+        style: {
+          width: '52%',
+        },
         accessor: 'title', // accessor is the "key" in the data
         Cell: ({ row }) => {
           let fullTitle = '';
@@ -32,6 +34,9 @@ export const Publications = () => {
       },
       {
         Header: 'Author',
+        style: {
+          width: '16%',
+        },
         Cell: ({ row }) => {
           return `${row.original.firstName} ${row.original.lastName}`;
         },
@@ -39,10 +44,16 @@ export const Publications = () => {
       {
         Header: 'Year',
         accessor: 'year',
+        style: {
+          width: '8%',
+        },
       },
       {
         Header: 'Language',
         accessor: 'language', // accessor is the "key" in the data
+        style: {
+          width: '10%',
+        },
         Cell: ({ row }) => {
           let language = '';
           if (row.original.language === '') {
@@ -56,6 +67,9 @@ export const Publications = () => {
       {
         Header: 'Document Type',
         accessor: 'documentType', // accessor is the "key" in the data
+        style: {
+          width: '14%',
+        },
       },
     ],
     []
