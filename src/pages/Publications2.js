@@ -22,10 +22,20 @@ export const Publications2 = () => {
   });
 
   const setFilters = (list, filter) => {
-    setSelectedFilters({
-      ...selectedFilters,
-      [list]: filter,
-    });
+    if (selectedFilters[list].includes(filter)) {
+      const newFilters = selectedFilters[list].filter(
+        (item) => item !== filter
+      );
+      setSelectedFilters({
+        ...selectedFilters,
+        [list]: newFilters,
+      });
+    } else {
+      setSelectedFilters({
+        ...selectedFilters,
+        [list]: [...selectedFilters[list], filter],
+      });
+    }
   };
 
   useEffect(() => {
@@ -102,7 +112,7 @@ export const Publications2 = () => {
                           name={option[0]}
                           value={option[0]}
                           onChange={(e) => {
-                            console.log(`${list[0]}: ${e.target.value}`);
+                            setFilters(list[0], e.target.value);
                           }}
                         ></input>
                       </div>
