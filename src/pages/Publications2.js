@@ -2,17 +2,47 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PublicationsContext from '../context/publications/publicationsContext';
 import { Navigation, Heading, Container, Footer } from '../components';
+import { AddList, AddAndSortList } from '../helpers';
 import ReactPaginate from 'react-paginate';
 
 export const Publications2 = () => {
   const { publications, isLoading, publicationsError, getPublications } =
     useContext(PublicationsContext);
 
+  const [filterLists, setFilterLists] = useState({
+    documentType: [],
+    language: [],
+    year: [],
+  });
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    documentType: [],
+    language: [],
+    year: [],
+  });
+
+  const setFilters = (list, filter) => {
+    setSelectedFilters({
+      ...selectedFilters,
+      [list]: filter,
+    });
+  };
+
   useEffect(() => {
     if (publications.length === 0) {
       getPublications();
     }
   }, [publications, getPublications]);
+
+  useEffect(() => {
+    if (publications.length > 0) {
+      setFilterLists({
+        documentType: AddList(publications, 'documentType'),
+        language: AddList(publications, 'language'),
+        year: AddList(publications, 'year'),
+      });
+    }
+  }, [publications]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [publicationsPerPage] = useState(10);
@@ -28,6 +58,24 @@ export const Publications2 = () => {
     setCurrentPage(selected + 1);
   };
 
+  const getLists = (lists) => {
+    const allLists = [];
+
+    for (const property in lists) {
+      const list = lists[property];
+
+      const myList = Object.keys(list).map((key) => {
+        return [key, list[key]];
+      });
+
+      allLists.push([property, myList]);
+
+      // return myList
+    }
+
+    return allLists;
+  };
+
   return (
     <>
       <Navigation />
@@ -37,6 +85,44 @@ export const Publications2 = () => {
           <span className='font-medium'>
             {publications.length} publications
           </span>
+        </div>
+        <div className='flex'>
+          {getLists(filterLists).map((list, i) => {
+            return (
+              <div className='pr-4 pt-2' key={i}>
+                <p>{list[0]}</p>
+                {list[1].map((option, i) => {
+                  return (
+                    <div className='flex items-start' key={i}>
+                      <div className='flex h-5 items-center mb-1'>
+                        <input
+                          type='checkbox'
+                          className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded'
+                          id={option[0]}
+                          name={option[0]}
+                          value={option[0]}
+                          onChange={(e) => {
+                            console.log(`${list[0]}: ${e.target.value}`);
+                          }}
+                        ></input>
+                      </div>
+                      <div className='ml-1 text-sm mb-1'>
+                        <label
+                          htmlFor={option[0]}
+                          className='ml-1.5 font-medium text-gray-700'
+                        >
+                          {option[0] === '' ? 'Not Specified' : option[0]}{' '}
+                          <span className='text-gray-500 font-normal'>
+                            ({option[1]})
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
         {publications ? (
           <div className='mt-4 flex flex-col'>
