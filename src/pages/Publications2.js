@@ -6,8 +6,14 @@ import { AddList, AddAndSortList } from '../helpers';
 import ReactPaginate from 'react-paginate';
 
 export const Publications2 = () => {
-  const { publications, isLoading, publicationsError, getPublications } =
-    useContext(PublicationsContext);
+  const {
+    publications,
+    filteredPublications,
+    isLoading,
+    publicationsError,
+    getPublications,
+    filterPublications,
+  } = useContext(PublicationsContext);
 
   const [filterLists, setFilterLists] = useState({
     documentType: [],
@@ -45,6 +51,10 @@ export const Publications2 = () => {
   }, [publications, getPublications]);
 
   useEffect(() => {
+    filterPublications(selectedFilters);
+  }, [selectedFilters, filterPublications]);
+
+  useEffect(() => {
     if (publications.length > 0) {
       setFilterLists({
         documentType: AddList(publications, 'documentType'),
@@ -59,7 +69,7 @@ export const Publications2 = () => {
 
   const indexOfLastPublication = currentPage * publicationsPerPage;
   const indexOfFirstPublication = indexOfLastPublication - publicationsPerPage;
-  const currentPublications = publications.slice(
+  const currentPublications = filteredPublications.slice(
     indexOfFirstPublication,
     indexOfLastPublication
   );
@@ -93,7 +103,7 @@ export const Publications2 = () => {
         <Heading>All Publications</Heading>
         <div className='mt-2'>
           <span className='font-medium'>
-            {publications.length} publications
+            {filteredPublications.length} publications
           </span>
         </div>
         <div className='flex'>
@@ -134,7 +144,7 @@ export const Publications2 = () => {
             );
           })}
         </div>
-        {publications ? (
+        {filteredPublications ? (
           <div className='mt-4 flex flex-col'>
             <div className='-my-2 -mx-4 sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
@@ -221,7 +231,9 @@ export const Publications2 = () => {
         )}
         <ReactPaginate
           onPageChange={paginate}
-          pageCount={Math.ceil(publications.length / publicationsPerPage)}
+          pageCount={Math.ceil(
+            filteredPublications.length / publicationsPerPage
+          )}
           previousLabel={'Prev'}
           nextLabel={'Next'}
           containerClassName={'pagination'}
