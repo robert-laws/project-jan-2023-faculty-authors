@@ -7,6 +7,9 @@ export { About } from './About';
 export { Contact } from './Contact';
 export { Login } from './Login';
 
+export { PubCards } from './PubCards';
+export { Publications3 } from './Publications3';
+
 // Admin pages
 export { NewPublication } from './admin/NewPublication';
 

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   Publications,
   Publications2,
+  Publications3,
   Publication,
   Home,
   NewPublication,
@@ -9,6 +10,7 @@ import {
   Contact,
   Login,
   NotFound,
+  PubCards,
 } from './pages';
 function App() {
   return (
@@ -18,11 +20,14 @@ function App() {
           {/* Public Routes */}
           <Route path='/' element={<Home />} />
           <Route path='/publications-old' element={<Publications />} />
-          <Route path='/publications' element={<Publications2 />} />
+          <Route path='/publications-old-2' element={<Publications2 />} />
           <Route path='/publication/:id' element={<Publication />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/login' element={<Login />} />
+
+          <Route path='/pubcards' element={<PubCards />} />
+          <Route path='/publications' element={<Publications3 />} />
 
           {/* Admin Routes */}
           <Route path='/new' element={<NewPublication />} />
