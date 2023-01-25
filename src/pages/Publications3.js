@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import PublicationsContext from '../context/publications/publicationsContext';
 import { Navigation, Heading, Container, Footer, Card } from '../components';
-import { AddList } from '../helpers';
+import { AddList, SortList } from '../helpers';
 import ReactPaginate from 'react-paginate';
 
 export const Publications3 = () => {
@@ -69,6 +68,10 @@ export const Publications3 = () => {
       const myList = Object.keys(list).map((key) => {
         return [key, list[key]];
       });
+
+      if (property === 'year') {
+        myList.sort((a, b) => b[0] - a[0]);
+      }
 
       allLists.push([property, myList]);
     }
@@ -190,6 +193,7 @@ export const Publications3 = () => {
                   filteredPublications.length > 0 ? (
                     currentPublications.map((publication) => (
                       <Card
+                        key={publication.pubId}
                         pubId={publication.pubId}
                         title={
                           publication.title === ''

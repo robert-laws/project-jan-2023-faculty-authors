@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PublicationsContext from '../context/publications/publicationsContext';
 import { Navigation, Heading, Container, Footer } from '../components';
-import { AddList } from '../helpers';
+import { AddList, SortList } from '../helpers';
 import ReactPaginate from 'react-paginate';
 
 export const Publications2 = () => {
@@ -37,7 +37,7 @@ export const Publications2 = () => {
       setFilterLists({
         documentType: AddList(publications, 'documentType'),
         language: AddList(publications, 'language'),
-        year: AddList(publications, 'year'),
+        year: SortList(AddList(publications, 'year')),
       });
     }
   }, [publications]);

@@ -10,10 +10,7 @@ export const Card = ({
   documentType,
 }) => {
   return (
-    <div
-      key={pubId}
-      className='relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-cyan-600 hover:bg-cyan-50'
-    >
+    <div className='relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-cyan-600 hover:bg-cyan-50'>
       <div className='flex-shrink-0'>{/* Future Checkbox */}</div>
       <div className='min-w-0 flex-1 space-y-1'>
         <Link to={`/publication/${pubId}`} className='focus:outline-none'>
