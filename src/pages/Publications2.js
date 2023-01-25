@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PublicationsContext from '../context/publications/publicationsContext';
 import { Navigation, Heading, Container, Footer } from '../components';
-import { AddList, AddAndSortList } from '../helpers';
+import { AddList } from '../helpers';
 import ReactPaginate from 'react-paginate';
 
 export const Publications2 = () => {
@@ -27,7 +27,20 @@ export const Publications2 = () => {
     year: [],
   });
 
+  const [filtersTouched, setFiltersTouched] = useState(false);
+
+  useEffect(() => {
+    if (publications.length > 0) {
+      setFilterLists({
+        documentType: AddList(publications, 'documentType'),
+        language: AddList(publications, 'language'),
+        year: AddList(publications, 'year'),
+      });
+    }
+  }, [publications]);
+
   const setFilters = (list, filter) => {
+    setFiltersTouched(true);
     if (selectedFilters[list].includes(filter)) {
       const newFilters = selectedFilters[list].filter(
         (item) => item !== filter
@@ -44,6 +57,22 @@ export const Publications2 = () => {
     }
   };
 
+  const getLists = (lists) => {
+    const allLists = [];
+
+    for (const property in lists) {
+      const list = lists[property];
+
+      const myList = Object.keys(list).map((key) => {
+        return [key, list[key]];
+      });
+
+      allLists.push([property, myList]);
+    }
+
+    return allLists;
+  };
+
   useEffect(() => {
     if (publications.length === 0) {
       getPublications();
@@ -51,18 +80,31 @@ export const Publications2 = () => {
   }, [publications, getPublications]);
 
   useEffect(() => {
-    filterPublications(selectedFilters);
-  }, [selectedFilters, filterPublications]);
+    const filtersArray = Object.entries(selectedFilters);
 
-  useEffect(() => {
-    if (publications.length > 0) {
-      setFilterLists({
-        documentType: AddList(publications, 'documentType'),
-        language: AddList(publications, 'language'),
-        year: AddList(publications, 'year'),
-      });
+    const applyFilters = (filterArray) => {
+      let filteredPublications = publications;
+
+      for (let i = 0; i < filterArray.length; i++) {
+        const list = filterArray[i][0];
+        const filters = filterArray[i][1];
+
+        if (filters.length > 0) {
+          filteredPublications = filteredPublications.filter((publication) =>
+            filters.includes(publication[list])
+          );
+        }
+      }
+
+      return filteredPublications;
+    };
+
+    console.log(applyFilters(filtersArray));
+
+    if (filtersTouched) {
+      filterPublications(applyFilters(filtersArray));
     }
-  }, [publications]);
+  }, [selectedFilters]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [publicationsPerPage] = useState(10);
@@ -76,24 +118,6 @@ export const Publications2 = () => {
 
   const paginate = ({ selected }) => {
     setCurrentPage(selected + 1);
-  };
-
-  const getLists = (lists) => {
-    const allLists = [];
-
-    for (const property in lists) {
-      const list = lists[property];
-
-      const myList = Object.keys(list).map((key) => {
-        return [key, list[key]];
-      });
-
-      allLists.push([property, myList]);
-
-      // return myList
-    }
-
-    return allLists;
   };
 
   return (
