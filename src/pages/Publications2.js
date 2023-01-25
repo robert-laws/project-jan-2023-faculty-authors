@@ -15,6 +15,9 @@ export const Publications2 = () => {
     filterPublications,
   } = useContext(PublicationsContext);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [publicationsPerPage] = useState(10);
+
   const [filterLists, setFilterLists] = useState({
     documentType: [],
     language: [],
@@ -99,15 +102,13 @@ export const Publications2 = () => {
       return filteredPublications;
     };
 
-    console.log(applyFilters(filtersArray));
+    // console.log(applyFilters(filtersArray));
 
     if (filtersTouched) {
+      setCurrentPage(1);
       filterPublications(applyFilters(filtersArray));
     }
   }, [selectedFilters]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [publicationsPerPage] = useState(10);
 
   const indexOfLastPublication = currentPage * publicationsPerPage;
   const indexOfFirstPublication = indexOfLastPublication - publicationsPerPage;
@@ -209,41 +210,49 @@ export const Publications2 = () => {
                       </tr>
                     </thead>
                     <tbody className='divide-y divide-gray-200 bg-white'>
-                      {currentPublications.map((publication) => (
-                        <tr key={publication.pubId}>
+                      {filteredPublications.length > 0 ? (
+                        currentPublications.map((publication) => (
+                          <tr key={publication.pubId}>
+                            <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
+                              {publication.title === '' ? (
+                                <Link
+                                  className='text-blue-600 hover:text-blue-500'
+                                  to={`/publication/${publication.pubId}`}
+                                >
+                                  {publication.sourceTitle}
+                                </Link>
+                              ) : (
+                                <Link
+                                  className='text-blue-600 hover:text-blue-500'
+                                  to={`/publication/${publication.pubId}`}
+                                >
+                                  {publication.title}
+                                </Link>
+                              )}
+                            </td>
+                            <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
+                              {publication.firstName} {publication.lastName}
+                            </td>
+                            <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
+                              {publication.year}
+                            </td>
+                            <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
+                              {publication.language === ''
+                                ? 'Not Specified'
+                                : publication.language}
+                            </td>
+                            <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
+                              {publication.documentType}
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
                           <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
-                            {publication.title === '' ? (
-                              <Link
-                                className='text-blue-600 hover:text-blue-500'
-                                to={`/publication/${publication.pubId}`}
-                              >
-                                {publication.sourceTitle}
-                              </Link>
-                            ) : (
-                              <Link
-                                className='text-blue-600 hover:text-blue-500'
-                                to={`/publication/${publication.pubId}`}
-                              >
-                                {publication.title}
-                              </Link>
-                            )}
-                          </td>
-                          <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
-                            {publication.firstName} {publication.lastName}
-                          </td>
-                          <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
-                            {publication.year}
-                          </td>
-                          <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
-                            {publication.language === ''
-                              ? 'Not Specified'
-                              : publication.language}
-                          </td>
-                          <td className='whitespace-normal py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6'>
-                            {publication.documentType}
+                            No Publications
                           </td>
                         </tr>
-                      ))}
+                      )}
                     </tbody>
                   </table>
                 </div>
