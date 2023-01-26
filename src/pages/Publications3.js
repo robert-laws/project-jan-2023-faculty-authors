@@ -15,21 +15,23 @@ export const Publications3 = () => {
   } = useContext(PublicationsContext);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [publicationsPerPage] = useState(10);
+  const [publicationsPerPage, setPublicationsPerPage] = useState(10);
 
   const [filterLists, setFilterLists] = useState({
     documentType: [],
     language: [],
     year: [],
+    cirsSponsored: [],
   });
 
   const [selectedFilters, setSelectedFilters] = useState({
     documentType: [],
     language: [],
     year: [],
+    cirsSponsored: [],
   });
 
-  const [filtersTouched, setFiltersTouched] = useState(false);
+  const [filtersTouched, setFiltersTouched] = useState(false); // add to context - reset upon page change to reset display of filters/records
 
   useEffect(() => {
     if (publications.length > 0) {
@@ -37,6 +39,7 @@ export const Publications3 = () => {
         documentType: AddList(publications, 'documentType'),
         language: AddList(publications, 'language'),
         year: AddList(publications, 'year'),
+        cirsSponsored: AddList(publications, 'cirsSponsored'),
       });
     }
   }, [publications]);
@@ -146,6 +149,8 @@ export const Publications3 = () => {
                         <p className='mb-2'>
                           {list[0] === 'documentType'
                             ? 'Document Type'
+                            : list[0] === 'cirsSponsored'
+                            ? 'CIRS Sponsored'
                             : list[0].charAt(0).toUpperCase() +
                               list[0].slice(1)}
                         </p>
@@ -236,6 +241,21 @@ export const Publications3 = () => {
                   activeLinkClassName={'active'}
                   disabledClassName={'disabled'}
                 />
+                <select
+                  id='currentPageSize'
+                  name='currentPageSize'
+                  className='mt-1 inline rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+                  value={publicationsPerPage}
+                  onChange={(e) => {
+                    setPublicationsPerPage(Number(e.target.value));
+                  }}
+                >
+                  {[10, 20, 30, 40, 50].map((pageSize) => (
+                    <option key={pageSize} value={pageSize}>
+                      Show {pageSize}
+                    </option>
+                  ))}
+                </select>
               </div>
             </main>
           </div>
