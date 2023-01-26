@@ -31,7 +31,8 @@ export const Publications3 = () => {
     cirsSponsored: [],
   });
 
-  const [filtersTouched, setFiltersTouched] = useState(false); // add to context - reset upon page change to reset display of filters/records
+  //TODO: add filtersTouched to context - reset to false upon page change -> to reset display of filters/records
+  const [filtersTouched, setFiltersTouched] = useState(false);
 
   useEffect(() => {
     if (publications.length > 0) {

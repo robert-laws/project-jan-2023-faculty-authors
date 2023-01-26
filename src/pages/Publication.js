@@ -28,6 +28,9 @@ export const Publication = () => {
     );
   }
 
+  // TODO: Add a loading spinner
+  // TODO: refine display of individual publications
+
   return (
     <>
       <Navigation />
@@ -44,72 +47,80 @@ export const Publication = () => {
             </h3>
             <div className='border-t border-gray-200 px-4 py-5 sm:p-0'>
               <dl className='sm:divide-y sm:divide-gray-200'>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>Author</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
+                    Author
+                  </dt>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.firstName} {publication.lastName}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     All Authors
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.authors.map((author) => (
                       <p key={author}>{author}</p>
                     ))}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>Editors</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
+                    Editors
+                  </dt>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.editors.map((editor) => (
                       <p key={editor}>{editor}</p>
                     ))}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Publication Year
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.year}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Document Type
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.documentType}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Abstract
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.abstract}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Language
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.language}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>Pages</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
+                    Pages
+                  </dt>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.pageCount} ({publication.pageStart}-
                     {publication.pageEnd})
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>Link</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
+                    Link
+                  </dt>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     <a
                       rel='noreferrer'
                       target='_blank'
@@ -119,93 +130,99 @@ export const Publication = () => {
                     </a>
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Volume and Issue
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     volume: {publication.volume}, issue: {publication.issue}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>ISSN</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
+                    ISSN
+                  </dt>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.issn}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>ISBN</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
+                    ISBN
+                  </dt>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.isbn.map((isbn) => (
                       <p key={isbn}>{isbn}</p>
                     ))}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>DOI</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
+                    DOI
+                  </dt>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.doi}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Publisher
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.publisher}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Author Keywords
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.authorKeywords.map((keyword) => (
                       <p key={keyword}>{keyword}</p>
                     ))}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Index Keywords
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.indexKeywords.map((keyword) => (
                       <p key={keyword}>{keyword}</p>
                     ))}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Sustainable Development Goals
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.sustainableDevelopmentGoals.map((goal) => (
                       <p key={goal}>{goal}</p>
                     ))}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Call Number
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.callNumber}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     CIRS Sponsored
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.cirsSponsored}
                   </dd>
                 </div>
-                <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5'>
-                  <dt className='text-sm font-medium text-gray-500'>
+                <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
+                  <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
                     Full Text
                   </dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
+                  <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.fullText}
                   </dd>
                 </div>

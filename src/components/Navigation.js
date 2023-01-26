@@ -36,12 +36,12 @@ export const Navigation = () => {
             </div>
           </div>
           <div className='ml-10 space-x-4'>
-            <Link
+            {/* <Link
               to='/login'
               className='inline-block rounded-md border border-transparent bg-cyan-700 py-2 px-3 text-base font-medium text-white hover:bg-cyan-50 hover:text-cyan-600'
             >
               Login
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className='flex flex-wrap justify-center space-x-6 py-4 lg:hidden'>
