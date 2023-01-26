@@ -30,7 +30,7 @@ function App() {
           <Route path='/publications' element={<Publications3 />} />
 
           {/* Admin Routes */}
-          <Route path='/new' element={<NewPublication />} />
+          <Route path='/admin/new' element={<NewPublication />} />
 
           {/* 404 */}
           <Route path='*' element={<NotFound />} />
