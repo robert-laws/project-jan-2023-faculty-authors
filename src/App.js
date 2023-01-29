@@ -5,13 +5,14 @@ import {
   Publications3,
   Publication,
   Home,
-  NewPublication,
   About,
   Contact,
   Login,
   NotFound,
   PubCards,
 } from './pages';
+
+import { NewPublication, EditPublication } from './pages/admin';
 function App() {
   return (
     <div className='bg-white flex flex-col min-h-screen'>
@@ -31,6 +32,7 @@ function App() {
 
           {/* Admin Routes */}
           <Route path='/admin/new' element={<NewPublication />} />
+          <Route path='/admin/edit' element={<EditPublication />} />
 
           {/* 404 */}
           <Route path='*' element={<NotFound />} />

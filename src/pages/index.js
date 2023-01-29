@@ -10,8 +10,5 @@ export { Login } from './Login';
 export { PubCards } from './PubCards';
 export { Publications3 } from './Publications3';
 
-// Admin pages
-export { NewPublication } from './admin/NewPublication';
-
 // 404
 export { NotFound } from './NotFound';
