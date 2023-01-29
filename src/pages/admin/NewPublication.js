@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Navigation, Heading, Container, Footer } from '../../components';
 import PublicationContext from '../../context/publication/publicationContext';
 
@@ -35,6 +35,10 @@ export const NewPublication = () => {
     fullText: '',
   });
 
+  const handleChange = (e) => {
+    setPublicationData({ ...publicationData, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       <Navigation />
@@ -61,10 +65,12 @@ export const NewPublication = () => {
                     <div className='mt-1'>
                       <input
                         type='text'
-                        name='first-name'
+                        name='firstName'
                         id='first-name'
                         autoComplete='given-name'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleChange(e)}
+                        value={publicationData.firstName}
                       />
                     </div>
                   </div>
@@ -79,10 +85,12 @@ export const NewPublication = () => {
                     <div className='mt-1'>
                       <input
                         type='text'
-                        name='last-name'
+                        name='lastName'
                         id='last-name'
                         autoComplete='family-name'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleChange(e)}
+                        value={publicationData.lastName}
                       />
                     </div>
                   </div>
