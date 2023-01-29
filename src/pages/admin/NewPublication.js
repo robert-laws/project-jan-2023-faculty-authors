@@ -8,7 +8,9 @@ export const NewPublication = () => {
   const [publicationData, setPublicationData] = useState({
     firstName: '',
     lastName: '',
-    authors: '',
+    authorScopusId: '',
+    authorResearcherId: '',
+    authors: [''],
     title: '',
     sourceTitle: '',
     language: '',
@@ -22,21 +24,52 @@ export const NewPublication = () => {
     doi: '',
     link: '',
     abstract: '',
-    authorKeywords: '',
-    indexKeywords: '',
-    editors: '',
+    authorKeywords: [''],
+    indexKeywords: [''],
+    editors: [''],
     publisher: '',
     issn: '',
     isbn: '',
     eid: '',
     callNumber: '',
-    sustainableDevelopmentGoals: '',
+    sustainableDevelopmentGoals: [''],
+    guqAffiliated: '',
     cirsSponsored: '',
     fullText: '',
   });
 
-  const handleChange = (e) => {
+  const languages = [
+    'English',
+    'Arabic',
+    'French',
+    'Italian',
+    'Spanish',
+    'German',
+    'Turkish',
+    'Other',
+  ];
+
+  const documentTypes = [
+    'Journal Article',
+    'Book Chapter',
+    'Authored Book',
+    'Edited Book',
+    'Conference Paper',
+    'Research Paper',
+    'Editorial',
+    'Book Review',
+    'Other',
+  ];
+
+  const handleTextChange = (e) => {
     setPublicationData({ ...publicationData, [e.target.name]: e.target.value });
+  };
+
+  const handleArrayChange = (e) => {
+    setPublicationData({
+      ...publicationData,
+      [e.target.name]: e.target.value.split(';'),
+    });
   };
 
   return (
@@ -69,7 +102,7 @@ export const NewPublication = () => {
                         id='first-name'
                         autoComplete='given-name'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                        onChange={(e) => handleChange(e)}
+                        onChange={(e) => handleTextChange(e)}
                         value={publicationData.firstName}
                       />
                     </div>
@@ -89,7 +122,7 @@ export const NewPublication = () => {
                         id='last-name'
                         autoComplete='family-name'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                        onChange={(e) => handleChange(e)}
+                        onChange={(e) => handleTextChange(e)}
                         value={publicationData.lastName}
                       />
                     </div>
@@ -107,9 +140,10 @@ export const NewPublication = () => {
                         id='authors'
                         name='authors'
                         type='text'
-                        autoComplete='authors'
                         placeholder='ex. Habib, Mohamed; Smith, David'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleArrayChange(e)}
+                        value={publicationData.authors.join(';')}
                       />
                     </div>
                     <p className='mt-2 text-sm text-gray-500'>
@@ -131,6 +165,8 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='title'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.title}
                       />
                     </div>
                   </div>
@@ -149,6 +185,8 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='sourceTitle'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.sourceTitle}
                       />
                     </div>
                   </div>
@@ -161,14 +199,20 @@ export const NewPublication = () => {
                       Language
                     </label>
                     <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='language'
+                      <select
                         id='language'
-                        placeholder='ex. english'
-                        autoComplete='language'
+                        name='language'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                      />
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.language}
+                      >
+                        <option value=''>Select...</option>
+                        {languages.map((language) => (
+                          <option key={language} value={language}>
+                            {language}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
@@ -180,13 +224,20 @@ export const NewPublication = () => {
                       Document Type
                     </label>
                     <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='documentType'
+                      <select
                         id='documentType'
-                        autoComplete='documentType'
+                        name='documentType'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                      />
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.documentType}
+                      >
+                        <option value=''>Select...</option>
+                        {documentTypes.map((documentType) => (
+                          <option key={documentType} value={documentType}>
+                            {documentType}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
@@ -228,6 +279,8 @@ export const NewPublication = () => {
                         autoComplete='year'
                         placeholder='ex. 2012'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.year}
                       />
                     </div>
                   </div>
@@ -246,6 +299,8 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='volume'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.volume}
                       />
                     </div>
                   </div>
@@ -264,6 +319,8 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='issue'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.issue}
                       />
                     </div>
                   </div>
@@ -282,6 +339,8 @@ export const NewPublication = () => {
                         type='number'
                         autoComplete='pageStart'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.pageStart}
                       />
                     </div>
                   </div>
@@ -300,6 +359,8 @@ export const NewPublication = () => {
                         type='number'
                         autoComplete='pageEnd'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.pageEnd}
                       />
                     </div>
                   </div>
@@ -318,6 +379,8 @@ export const NewPublication = () => {
                         type='number'
                         autoComplete='pageCount'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.pageCount}
                       />
                     </div>
                   </div>
@@ -336,6 +399,8 @@ export const NewPublication = () => {
                         id='doi'
                         autoComplete='doi'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.doi}
                       />
                     </div>
                   </div>
@@ -355,6 +420,8 @@ export const NewPublication = () => {
                         placeholder='https://'
                         autoComplete='address-level2'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.link}
                       />
                     </div>
                   </div>
@@ -372,7 +439,8 @@ export const NewPublication = () => {
                         name='abstract'
                         rows={3}
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                        defaultValue={''}
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.abstract}
                       />
                     </div>
                     <p className='mt-2 text-sm text-gray-500'>
@@ -394,10 +462,12 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='authorKeywords'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleArrayChange(e)}
+                        value={publicationData.authorKeywords.join(';')}
                       />
                     </div>
                     <p className='mt-2 text-sm text-gray-500'>
-                      Separate author keywords with a comma.
+                      Separate author keywords with a semicolon.
                     </p>
                   </div>
 
@@ -415,10 +485,12 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='indexKeywords'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleArrayChange(e)}
+                        value={publicationData.indexKeywords.join(';')}
                       />
                     </div>
                     <p className='mt-2 text-sm text-gray-500'>
-                      Separate index keywords with a comma.
+                      Separate index keywords with a semicolon.
                     </p>
                   </div>
 
@@ -436,10 +508,12 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='editors'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleArrayChange(e)}
+                        value={publicationData.editors.join(';')}
                       />
                     </div>
                     <p className='mt-2 text-sm text-gray-500'>
-                      Separate editors with a comma.
+                      Separate editors with a semicolon.
                     </p>
                   </div>
 
@@ -457,6 +531,8 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='publisher'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.publisher}
                       />
                     </div>
                   </div>
@@ -475,6 +551,8 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='issn'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.issn}
                       />
                     </div>
                   </div>
@@ -493,29 +571,13 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='isbn'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.isbn}
                       />
                     </div>
                   </div>
 
-                  <div className='sm:col-span-1'>
-                    <label
-                      htmlFor='eid'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      EID
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        id='eid'
-                        name='eid'
-                        type='text'
-                        autoComplete='eid'
-                        className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='sm:col-span-1'>
+                  <div className='sm:col-span-2'>
                     <label
                       htmlFor='callNumber'
                       className='block text-sm font-medium text-gray-700'
@@ -529,11 +591,73 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='callNumber'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.callNumber}
                       />
                     </div>
                   </div>
 
-                  <div className='sm:col-span-3'>
+                  <div className='sm:col-span-2'>
+                    <label
+                      htmlFor='authorScopusId'
+                      className='block text-sm font-medium text-gray-700'
+                    >
+                      Author Scopus ID
+                    </label>
+                    <div className='mt-1'>
+                      <input
+                        id='authorScopusId'
+                        name='authorScopusId'
+                        type='text'
+                        autoComplete='authorScopusId'
+                        className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.authorScopusId}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='sm:col-span-2'>
+                    <label
+                      htmlFor='authorResearcherId'
+                      className='block text-sm font-medium text-gray-700'
+                    >
+                      Author Researcher ID
+                    </label>
+                    <div className='mt-1'>
+                      <input
+                        id='authorResearcherId'
+                        name='authorResearcherId'
+                        type='text'
+                        autoComplete='authorResearcherId'
+                        className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.authorResearcherId}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='sm:col-span-2'>
+                    <label
+                      htmlFor='eid'
+                      className='block text-sm font-medium text-gray-700'
+                    >
+                      EID
+                    </label>
+                    <div className='mt-1'>
+                      <input
+                        id='eid'
+                        name='eid'
+                        type='text'
+                        autoComplete='eid'
+                        className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.eid}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='sm:col-span-4'>
                     <label
                       htmlFor='sustainableDevelopmentGoals'
                       className='block text-sm font-medium text-gray-700'
@@ -547,10 +671,14 @@ export const NewPublication = () => {
                         type='text'
                         autoComplete='sustainableDevelopmentGoals'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleArrayChange(e)}
+                        value={publicationData.sustainableDevelopmentGoals.join(
+                          ';'
+                        )}
                       />
                     </div>
                     <p className='mt-2 text-sm text-gray-500'>
-                      Separate sustainable development goals with a comma.
+                      Separate sustainable development goals with a semicolon.
                     </p>
                   </div>
 
@@ -567,7 +695,41 @@ export const NewPublication = () => {
                         name='cirsSponsored'
                         autoComplete='cirsSponsored'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.cirsSponsored}
                       >
+                        <option key='Select' value=''>
+                          Select...
+                        </option>
+                        <option key='Yes' value='Yes'>
+                          Yes
+                        </option>
+                        <option key='No' value='No'>
+                          No
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className='sm:col-span-1'>
+                    <label
+                      htmlFor='guqAffiliated'
+                      className='block text-sm font-medium text-gray-700'
+                    >
+                      GUQ Affiliated
+                    </label>
+                    <div className='mt-1'>
+                      <select
+                        id='guqAffiliated'
+                        name='guqAffiliated'
+                        autoComplete='guqAffiliated'
+                        className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                        onChange={(e) => handleTextChange(e)}
+                        value={publicationData.guqAffiliated}
+                      >
+                        <option key='Select' value=''>
+                          Select...
+                        </option>
                         <option key='Yes' value='Yes'>
                           Yes
                         </option>
