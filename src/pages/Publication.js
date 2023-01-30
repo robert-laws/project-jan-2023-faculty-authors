@@ -79,7 +79,7 @@ export const Publication = () => {
                 </div>
                 <div className='py-4 sm:grid sm:grid-cols-6 sm:gap-4 sm:py-5'>
                   <dt className='text-sm font-medium text-gray-900 text-left md:text-right'>
-                    Author Research ID
+                    Author Researcher ID
                   </dt>
                   <dd className='mt-1 text-sm text-gray-600 sm:col-span-5 sm:mt-0'>
                     {publication.authorResearcherId}

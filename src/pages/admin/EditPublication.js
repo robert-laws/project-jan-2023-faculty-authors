@@ -97,7 +97,8 @@ export const EditPublication = () => {
 
     const pubId = editPublication(editedPublication);
 
-    navigate(`/publication/${pubId}`);
+    // navigate(`/publication/${pubId}`);
+    navigate('/publications');
   };
 
   return (

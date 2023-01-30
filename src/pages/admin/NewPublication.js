@@ -80,7 +80,8 @@ export const NewPublication = () => {
 
     const pubId = addPublication(publicationData);
 
-    navigate(`/publication/${pubId}`);
+    // navigate(`/publication/${pubId}`);
+    navigate('/publications');
   };
 
   return (
