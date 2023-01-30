@@ -1,9 +1,12 @@
 import { useState, useContext, useEffect } from 'react';
 import { Navigation, Heading, Container, Footer } from '../../components';
-import PublicationContext from '../../context/publication/publicationContext';
+import PublicationsContext from '../../context/publications/publicationsContext';
+import { useNavigate } from 'react-router-dom';
 
 export const NewPublication = () => {
-  // const { publication } = useContext(PublicationContext);
+  const navigate = useNavigate();
+
+  const { addNewPublication } = useContext(PublicationsContext);
 
   const [publicationData, setPublicationData] = useState({
     firstName: '',
@@ -72,13 +75,24 @@ export const NewPublication = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const pubId = addNewPublication(publicationData);
+
+    navigate(`/publication/${pubId}`);
+  };
+
   return (
     <>
       <Navigation />
       <Container>
         <Heading>Publication</Heading>
         <div className='container mx-auto px-4 py-4'>
-          <form className='space-y-8 divide-y divide-gray-200'>
+          <form
+            className='space-y-8 divide-y divide-gray-200'
+            onSubmit={handleSubmit}
+          >
             <div className='space-y-8 divide-y divide-gray-200'>
               <div className='pt-8 space-y-8 divide-y divide-gray-200'>
                 <div>
@@ -100,7 +114,7 @@ export const NewPublication = () => {
                         type='text'
                         name='firstName'
                         id='first-name'
-                        autoComplete='given-name'
+                        placeholder='ex. Yousef'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.firstName}
@@ -120,7 +134,7 @@ export const NewPublication = () => {
                         type='text'
                         name='lastName'
                         id='last-name'
-                        autoComplete='family-name'
+                        placeholder='ex. Haji'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.lastName}
@@ -163,7 +177,7 @@ export const NewPublication = () => {
                         id='title'
                         name='title'
                         type='text'
-                        autoComplete='title'
+                        placeholder='ex. The Impact of COVID-19 on the Global Economy'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.title}
@@ -183,7 +197,7 @@ export const NewPublication = () => {
                         id='sourceTitle'
                         name='sourceTitle'
                         type='text'
-                        autoComplete='sourceTitle'
+                        placeholder='ex. Journal of International Affairs'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.sourceTitle}
@@ -214,6 +228,9 @@ export const NewPublication = () => {
                         ))}
                       </select>
                     </div>
+                    <p className='mt-2 text-sm text-gray-500'>
+                      Original language of the publication.
+                    </p>
                   </div>
 
                   <div className='sm:col-span-3'>
@@ -276,7 +293,6 @@ export const NewPublication = () => {
                         id='year'
                         name='year'
                         type='text'
-                        autoComplete='year'
                         placeholder='ex. 2012'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
@@ -297,7 +313,7 @@ export const NewPublication = () => {
                         id='volume'
                         name='volume'
                         type='text'
-                        autoComplete='volume'
+                        placeholder='ex. 4'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.volume}
@@ -317,7 +333,7 @@ export const NewPublication = () => {
                         id='issue'
                         name='issue'
                         type='text'
-                        autoComplete='issue'
+                        placeholder='ex. 2'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.issue}
@@ -337,7 +353,7 @@ export const NewPublication = () => {
                         id='pageStart'
                         name='pageStart'
                         type='number'
-                        autoComplete='pageStart'
+                        placeholder='ex. 34'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.pageStart}
@@ -357,7 +373,7 @@ export const NewPublication = () => {
                         id='pageEnd'
                         name='pageEnd'
                         type='number'
-                        autoComplete='pageEnd'
+                        placeholder='ex. 58'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.pageEnd}
@@ -377,7 +393,7 @@ export const NewPublication = () => {
                         id='pageCount'
                         name='pageCount'
                         type='number'
-                        autoComplete='pageCount'
+                        placeholder='ex. 24'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.pageCount}
@@ -397,7 +413,7 @@ export const NewPublication = () => {
                         type='text'
                         name='doi'
                         id='doi'
-                        autoComplete='doi'
+                        placeholder='ex. doi:10.1038/nphys1170'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.doi}
@@ -410,14 +426,14 @@ export const NewPublication = () => {
                       htmlFor='link'
                       className='block text-sm font-medium text-gray-700'
                     >
-                      Link
+                      Permalink
                     </label>
                     <div className='mt-1'>
                       <input
                         type='text'
                         name='link'
                         id='link'
-                        placeholder='https://'
+                        placeholder='https://www.webofscience.com/wos/woscc/full-record/WOS:000668817900007'
                         autoComplete='address-level2'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
@@ -444,7 +460,7 @@ export const NewPublication = () => {
                       />
                     </div>
                     <p className='mt-2 text-sm text-gray-500'>
-                      Add the abstract for the publication.
+                      Provide the abstract for the publication.
                     </p>
                   </div>
 
@@ -460,7 +476,7 @@ export const NewPublication = () => {
                         id='authorKeywords'
                         name='authorKeywords'
                         type='text'
-                        autoComplete='authorKeywords'
+                        placeholder='ex. Legitimacy; Pakistan Army; Terrorism'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleArrayChange(e)}
                         value={publicationData.authorKeywords.join(';')}
@@ -483,7 +499,7 @@ export const NewPublication = () => {
                         id='indexKeywords'
                         name='indexKeywords'
                         type='text'
-                        autoComplete='indexKeywords'
+                        placeholder='United States--US; Afghanistan; Kabul Afghanistan'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleArrayChange(e)}
                         value={publicationData.indexKeywords.join(';')}
@@ -506,7 +522,7 @@ export const NewPublication = () => {
                         id='editors'
                         name='editors'
                         type='text'
-                        autoComplete='editors'
+                        placeholder='ex. Jamison, Daniel; Kharas, Homi; Nye, Joseph S.'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleArrayChange(e)}
                         value={publicationData.editors.join(';')}
@@ -529,7 +545,7 @@ export const NewPublication = () => {
                         id='publisher'
                         name='publisher'
                         type='text'
-                        autoComplete='publisher'
+                        placeholder='ex. Oxford University Press'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.publisher}
@@ -549,7 +565,7 @@ export const NewPublication = () => {
                         id='issn'
                         name='issn'
                         type='text'
-                        autoComplete='issn'
+                        placeholder='ex. 0022-1996'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.issn}
@@ -569,7 +585,7 @@ export const NewPublication = () => {
                         id='isbn'
                         name='isbn'
                         type='text'
-                        autoComplete='isbn'
+                        placeholder='ex. 978-0-19-067472-3'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.isbn}
@@ -589,7 +605,7 @@ export const NewPublication = () => {
                         id='callNumber'
                         name='callNumber'
                         type='text'
-                        autoComplete='callNumber'
+                        placeholder='ex. DS 135.5 .A1 2008'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.callNumber}
@@ -609,7 +625,7 @@ export const NewPublication = () => {
                         id='authorScopusId'
                         name='authorScopusId'
                         type='text'
-                        autoComplete='authorScopusId'
+                        placeholder='ex. 7004210000'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.authorScopusId}
@@ -629,7 +645,7 @@ export const NewPublication = () => {
                         id='authorResearcherId'
                         name='authorResearcherId'
                         type='text'
-                        autoComplete='authorResearcherId'
+                        placeholder='ex. 0-7315-2104'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.authorResearcherId}
@@ -649,7 +665,7 @@ export const NewPublication = () => {
                         id='eid'
                         name='eid'
                         type='text'
-                        autoComplete='eid'
+                        placeholder='ex. 2-s2.0-84881394200'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.eid}
@@ -669,7 +685,7 @@ export const NewPublication = () => {
                         id='sustainableDevelopmentGoals'
                         name='sustainableDevelopmentGoals'
                         type='text'
-                        autoComplete='sustainableDevelopmentGoals'
+                        placeholder='SDG 6; SDG 8; SDG 13'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleArrayChange(e)}
                         value={publicationData.sustainableDevelopmentGoals.join(
@@ -693,7 +709,6 @@ export const NewPublication = () => {
                       <select
                         id='cirsSponsored'
                         name='cirsSponsored'
-                        autoComplete='cirsSponsored'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.cirsSponsored}
@@ -722,7 +737,6 @@ export const NewPublication = () => {
                       <select
                         id='guqAffiliated'
                         name='guqAffiliated'
-                        autoComplete='guqAffiliated'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleTextChange(e)}
                         value={publicationData.guqAffiliated}
@@ -753,7 +767,7 @@ export const NewPublication = () => {
                           id='fullText'
                           name='fullText'
                           type='text'
-                          autoComplete='fullText'
+                          placeholder='ex. document.pdf'
                           disabled
                           className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-slate-50'
                         />

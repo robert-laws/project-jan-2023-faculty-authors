@@ -19,7 +19,7 @@ const PublicationState = ({ children }) => {
 
       data.forEach((faculty, index) => {
         if (faculty.pubId === id) {
-          publication = { id: index, ...faculty };
+          publication = faculty;
         }
       });
 

@@ -1,8 +1,10 @@
 import { useReducer, useCallback } from 'react';
+import { v4 as uuid } from 'uuid';
 import {
   GET_PUBLICATIONS,
   PUBLICATIONS_ERROR,
   GET_FILTERED_PUBLICATIONS,
+  ADD_NEW_PUBLICATION,
 } from '../types';
 import PublicationsContext from './publicationsContext';
 import publicationsReducer from './publicationsReducer';
@@ -48,6 +50,24 @@ const PublicationsState = ({ children }) => {
     [dispatch]
   );
 
+  const addNewPublication = useCallback(
+    (newPublication) => {
+      const unique_id = uuid();
+      const pubId = unique_id.slice(0, 8);
+
+      let publication = { id: 5555, pubId, ...newPublication };
+      // console.log(publication);
+
+      dispatch({
+        type: ADD_NEW_PUBLICATION,
+        payload: publication,
+      });
+
+      return pubId;
+    },
+    [dispatch]
+  );
+
   return (
     <PublicationsContext.Provider
       value={{
@@ -57,6 +77,7 @@ const PublicationsState = ({ children }) => {
         publicationsError: state.publicationsError,
         getPublications,
         filterPublications,
+        addNewPublication,
       }}
     >
       {children}

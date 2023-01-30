@@ -8,6 +8,7 @@ export const Navigation = () => {
     { name: 'Publications', href: '/publications' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
+    { name: 'New', href: '/admin/new' },
   ];
 
   return (
