@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const NewPublication = () => {
   const navigate = useNavigate();
 
-  const { addNewPublication } = useContext(PublicationsContext);
+  const { addPublication } = useContext(PublicationsContext);
 
   const [publicationData, setPublicationData] = useState({
     firstName: '',
@@ -21,8 +21,8 @@ export const NewPublication = () => {
     year: '',
     volume: '',
     issue: '',
-    firstPage: '',
-    lastPage: '',
+    pageStart: '',
+    pageEnd: '',
     pageCount: '',
     doi: '',
     link: '',
@@ -78,7 +78,7 @@ export const NewPublication = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const pubId = addNewPublication(publicationData);
+    const pubId = addPublication(publicationData);
 
     navigate(`/publication/${pubId}`);
   };
@@ -499,7 +499,7 @@ export const NewPublication = () => {
                         id='indexKeywords'
                         name='indexKeywords'
                         type='text'
-                        placeholder='United States--US; Afghanistan; Kabul Afghanistan'
+                        placeholder='ex. United States--US; Afghanistan; Kabul Afghanistan'
                         className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                         onChange={(e) => handleArrayChange(e)}
                         value={publicationData.indexKeywords.join(';')}

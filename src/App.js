@@ -32,7 +32,7 @@ function App() {
 
           {/* Admin Routes */}
           <Route path='/admin/new' element={<NewPublication />} />
-          <Route path='/admin/edit' element={<EditPublication />} />
+          <Route path='/admin/edit/:id' element={<EditPublication />} />
 
           {/* 404 */}
           <Route path='*' element={<NotFound />} />

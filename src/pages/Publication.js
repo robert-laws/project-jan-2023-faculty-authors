@@ -1,10 +1,11 @@
 import { useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import PublicationContext from '../context/publication/publicationContext';
 import { Navigation, Heading, Container, Footer } from '../components';
 
 export const Publication = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { publication, isLoading, publicationError, getPublicationById } =
     useContext(PublicationContext);
 
@@ -17,6 +18,10 @@ export const Publication = () => {
       getPublicationById(+id);
     }
   }, [getPublicationById, id]);
+
+  const handleEditClick = () => {
+    navigate(`/admin/edit/${id}`);
+  };
 
   if (publicationError) {
     return (
@@ -35,7 +40,16 @@ export const Publication = () => {
     <>
       <Navigation />
       <Container>
-        <Heading>Publication Detail</Heading>
+        <div className='flex place-content-between'>
+          <Heading>Publication Detail</Heading>
+          <button
+            type='button'
+            className='inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+            onClick={handleEditClick}
+          >
+            Edit this Publication
+          </button>
+        </div>
         {isLoading && !publicationError ? (
           <p>Loading...</p>
         ) : (

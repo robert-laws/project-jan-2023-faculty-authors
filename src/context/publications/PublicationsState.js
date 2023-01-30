@@ -4,7 +4,8 @@ import {
   GET_PUBLICATIONS,
   PUBLICATIONS_ERROR,
   GET_FILTERED_PUBLICATIONS,
-  ADD_NEW_PUBLICATION,
+  ADD_PUBLICATION,
+  EDIT_PUBLICATION,
 } from '../types';
 import PublicationsContext from './publicationsContext';
 import publicationsReducer from './publicationsReducer';
@@ -50,7 +51,7 @@ const PublicationsState = ({ children }) => {
     [dispatch]
   );
 
-  const addNewPublication = useCallback(
+  const addPublication = useCallback(
     (newPublication) => {
       const unique_id = uuid();
       const pubId = unique_id.slice(0, 8);
@@ -59,11 +60,23 @@ const PublicationsState = ({ children }) => {
       // console.log(publication);
 
       dispatch({
-        type: ADD_NEW_PUBLICATION,
+        type: ADD_PUBLICATION,
         payload: publication,
       });
 
       return pubId;
+    },
+    [dispatch]
+  );
+
+  const editPublication = useCallback(
+    (updatedPublication) => {
+      dispatch({
+        type: EDIT_PUBLICATION,
+        payload: updatedPublication,
+      });
+
+      return updatedPublication.pubId;
     },
     [dispatch]
   );
@@ -77,7 +90,8 @@ const PublicationsState = ({ children }) => {
         publicationsError: state.publicationsError,
         getPublications,
         filterPublications,
-        addNewPublication,
+        addPublication,
+        editPublication,
       }}
     >
       {children}
